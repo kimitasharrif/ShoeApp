@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#76FF03"
+    android:orientation="vertical"
+    tools:context=".MainActivity">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="100dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/linear1"
+            android:layout_centerVertical="true"
+            android:paddingTop="20dp"
+            android:orientation="horizontal"
+            android:layout_marginLeft="2dp">
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:layout_width="55dp"
+                android:layout_height="55dp"
+                android:id="@+id/profileimage"
+                android:src="@drawable/person"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="5dp"/>
+
+            <EditText
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:drawableStart="@drawable/search"
+                android:hint="Search shoe name..."
+                android:fontFamily="@font/montserrat"
+                android:id="@+id/search"
+                android:textSize="18sp"
+                android:textColor="@color/black"
+                android:layout_margin="0dp"
+                android:background="@drawable/rounded_edittext_background" />
+
+            <LinearLayout
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_gravity="end"
+                android:paddingTop="10dp">
+
+                <ImageView
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:paddingTop="5dp"
+                    android:paddingLeft="5dp"
+                    android:src="@drawable/shopping_cart"
+                    android:id="@+id/imagecart"
+                    app:showAsAction="always"/>
+
+                <TextView
+                    android:layout_width="18dp"
+                    android:layout_height="18dp"
+                    android:text="3"
+                    android:id="@+id/badge"
+                    android:textStyle="bold"
+                    android:textColor="#FF9800"
+                    android:background="@drawable/shape"
+                    android:layout_gravity="top|end"
+                    android:layout_marginTop="-4dp"
+                    android:layout_marginEnd="-4dp"
+                    android:gravity="center"/>
+
+            </LinearLayout>
+        </LinearLayout>
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:id="@+id/linear2">
+        <com.google.android.material.textview.MaterialTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Guest"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            android:layout_marginStart="5dp"
+            android:id="@+id/user"
+            android:padding="5dp"
+            android:textSize="18sp"/>
+        <com.google.android.material.button.MaterialButton
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:id="@+id/signin"
+            app:cornerRadius="6dp"
+            android:textColor="@color/black"
+            android:textSize="11sp"
+            android:layout_marginStart="5dp"
+            android:text="SIGN IN"/>
+    </LinearLayout>
+
+    <ProgressBar
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:id="@+id/progress"/>
+
+    <!-- HorizontalScrollView for horizontal scrolling-->
+    <HorizontalScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:scrollbars="none">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="8dp">
+
+            <!-- Category Buttons -->
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/button_show_all"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="All"
+                android:layout_marginEnd="8dp" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/button_category_sneakers"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Sneakers"
+                android:textColor="@color/white"
+                android:backgroundTint="@color/teal_700"
+                android:layout_marginEnd="8dp"/>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/button_category_boots"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Boots"
+                android:textColor="@color/white"
+                android:backgroundTint="@color/teal_700"
+                android:layout_marginEnd="8dp"/>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/button_category_sandals"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Sandals"
+                android:textColor="@color/white"
+                android:backgroundTint="@color/teal_700"
+                android:layout_marginEnd="8dp"/>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/button_category_formal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Formal"
+                android:textColor="@color/white"
+                android:backgroundTint="@color/teal_700"
+                android:layout_marginEnd="8dp"/>
+        </LinearLayout>
+    </HorizontalScrollView>
+
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/swiperefresh">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/recyclerview"
+            tools:listitem="@layout/single_shoe"/>
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+</LinearLayout>

@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    app:cardElevation="10dp"
+    android:layout_margin="10dp"
+    app:cardCornerRadius="5dp">
+
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/linear1"
+            android:layout_marginLeft="10dp">
+
+            <com.google.android.material.textview.MaterialTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Air Max"
+                android:paddingLeft="10dp"
+                android:textStyle="bold"
+                android:textSize="24sp"
+                android:fontFamily="@font/montserrat1"
+                android:textColor="@color/black"
+                android:id="@+id/name"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_below="@id/linear1"
+            android:id="@+id/linear2">
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="300dp"
+                android:id="@+id/shoeimage"
+                android:src="@drawable/shoe5"/>
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/linear2"
+            android:id="@+id/linear3"
+            android:layout_marginBottom="20dp"
+            android:layout_marginLeft="20dp"
+            android:orientation="vertical">
+            <com.google.android.material.textview.MaterialTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="NIKE"
+                android:paddingLeft="10dp"
+                android:textStyle="bold"
+                android:textSize="16sp"
+                android:fontFamily="@font/montserrat1"
+                android:textColor="#F3090808"
+                android:layout_marginTop="6dp"
+                android:id="@+id/brand"/>
+            <com.google.android.material.textview.MaterialTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Price: KES 3,500"
+                android:paddingLeft="10dp"
+                android:textStyle="bold"
+                android:textSize="16sp"
+                android:fontFamily="@font/montserrat1"
+                android:textColor="#FAED092B"
+                android:layout_marginTop="6dp"
+                android:id="@+id/price"/>
+
+
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/linear3"
+            android:layout_marginTop="5dp"
+            android:id="@+id/linear4"
+            android:layout_marginLeft="20dp"
+            android:orientation="vertical">
+            <com.google.android.material.button.MaterialButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:backgroundTint="#EA0909"
+                android:layout_marginRight="10dp"
+                android:text="Remove"
+                android:id="@+id/remove"
+                android:layout_gravity="center"
+                app:cornerRadius="5dp"
+                android:textSize="22sp"/>
+
+        </LinearLayout>
+    </RelativeLayout>
+</androidx.cardview.widget.CardView>

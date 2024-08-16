@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="8dp"
+    app:cardElevation="10dp"
+    app:cardCornerRadius="5dp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp">
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Air Max"
+            android:textStyle="bold"
+            android:textSize="18sp"
+            android:fontFamily="@font/montserrat1"
+            android:textColor="@color/black"
+            android:layout_alignParentStart="true"
+            android:layout_marginBottom="8dp"/>
+
+        <ImageView
+            android:id="@+id/shoeimage"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:layout_below="@id/name"
+            android:layout_centerHorizontal="true"
+            android:scaleType="centerCrop"
+            android:src="@drawable/shoe5"/>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/shoeimage"
+            android:layout_marginTop="10dp"
+            android:orientation="vertical"
+            android:paddingLeft="5dp">
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/brand"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="NIKE"
+                android:textStyle="bold"
+                android:textSize="14sp"
+                android:fontFamily="@font/montserrat1"
+                android:textColor="#F3090808"
+                android:layout_marginTop="4dp"/>
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/price"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Price: KES 3,500"
+                android:textStyle="bold"
+                android:textSize="14sp"
+                android:fontFamily="@font/montserrat1"
+                android:textColor="#FAED092B"
+                android:layout_marginTop="4dp"/>
+        </LinearLayout>
+    </RelativeLayout>
+</androidx.cardview.widget.CardView>
