@@ -105,7 +105,7 @@ class MyCart : AppCompatActivity() {
         } else {
             // access adapter and provide it with data using get all items
             val adapter = ShoeCartAdapter(applicationContext)
-            adapter.setListIteems(helper.getAllItems())// now we passed our data
+            adapter.setListItems(helper.getAllItems())// now we passed our data
             // link your adapetr to recycler
             recyclerview.adapter = adapter
         }

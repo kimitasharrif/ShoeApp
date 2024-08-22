@@ -1,120 +1,151 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
-xmlns:app="http://schemas.android.com/apk/res-auto"
-xmlns:tools="http://schemas.android.com/tools"
-android:id="@+id/main"
-android:layout_width="match_parent"
-android:layout_height="wrap_content"
-app:cardElevation="10dp"
-android:layout_marginTop="10dp"
-android:layout_margin="10dp"
-tools:context=".SingleShoeActivity">
-
-<RelativeLayout
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content"
+    app:cardElevation="10dp"
+    android:layout_marginTop="10dp"
+    android:layout_margin="10dp"
+    tools:context=".SingleShoeActivity">
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/linear1"
-        android:layout_marginTop="10dp"
-        android:orientation="horizontal">
-        <com.google.android.material.textview.MaterialTextView
+        android:layout_height="match_parent">
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Air Max"
-            android:fontFamily="@font/montserrat1"
-            android:id="@+id/name"
-            android:textStyle="bold"
+            android:id="@+id/linear1"
             android:layout_marginTop="10dp"
-            android:textSize="18sp"
-            android:layout_marginStart="10dp"
-            android:layout_marginBottom="5dp"/>
+            android:orientation="horizontal">
+            <com.google.android.material.textview.MaterialTextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Air Max"
+                android:fontFamily="@font/montserrat1"
+                android:id="@+id/name"
+                android:textStyle="bold"
+                android:layout_marginTop="10dp"
+                android:textSize="18sp"
+                android:layout_marginStart="10dp"
+                android:layout_marginBottom="5dp"/>
+        </LinearLayout>
 
-
-
-
-
-
-
-    </LinearLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginTop="15dp"
-        android:layout_below="@id/linear1"
-        android:id="@+id/linear2">
-        <ImageView
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="300dp"
-            android:id="@+id/shoeimage"
-            android:src="@drawable/shoe5"/>
-
-    </LinearLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/linear3"
-        android:layout_marginTop="15dp"
-        android:orientation="horizontal"
-        android:layout_below="@id/linear2">
-        <com.google.android.material.textview.MaterialTextView
-            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="10% OFF"
-            android:textColor="#FF9800"
-            android:layout_marginLeft="15dp"
-            android:textSize="20sp"
-            android:textStyle="bold"
-            android:id="@+id/brand"/>
-        <com.google.android.material.textview.MaterialTextView
-            android:layout_width="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="15dp"
+            android:layout_below="@id/linear1"
+            android:id="@+id/linear2">
+            <ImageView
+                android:id="@+id/shoeimage"
+                android:layout_width="match_parent"
+                android:layout_height="300dp"
+                android:scaleType="centerCrop"
+                android:layout_marginEnd="16dp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="1500KES"
-            android:textColor="#ED0D38"
-            android:layout_marginLeft="40dp"
-            android:textSize="20sp"
-            android:textStyle="bold"
-            android:id="@+id/price"/>
+            android:id="@+id/linear3"
+            android:layout_marginTop="15dp"
+            android:orientation="horizontal"
+            android:layout_below="@id/linear2">
+            <com.google.android.material.textview.MaterialTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Nike"
+                android:textColor="#FF9800"
+                android:layout_marginLeft="15dp"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:id="@+id/brand"/>
+            <com.google.android.material.textview.MaterialTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="1500KES"
+                android:textColor="#ED0D38"
+                android:layout_marginLeft="40dp"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:id="@+id/price"/>
+        </LinearLayout>
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@id/linear4"
+            android:layout_marginTop="10dp"
+                android:orientation="vertical"
+                android:layout_below="@id/linear3">
 
-    </LinearLayout>
+            <com.google.android.material.textview.MaterialTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Select your Size"
+                android:textStyle="bold"
+                android:textSize="18sp"/>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/linear4"
-        android:layout_marginTop="40dp"
-        android:orientation="horizontal"
-        android:layout_below="@id/linear3">
-        <com.google.android.material.button.MaterialButton
-            android:layout_width="wrap_content"
+
+      </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/size_selector"
+                    android:layout_marginTop="20dp"
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    android:layout_below="@id/linear4">
+
+                    <ImageButton
+                        android:id="@+id/decrement_size"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/baseline_arrow_back_ios_24"
+                        android:contentDescription="Decrease Size"
+                        android:background="?attr/selectableItemBackground"
+                        android:layout_marginStart="15dp"/>
+                    <TextView
+                        android:id="@+id/size_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Size 8"
+                        android:textSize="16sp"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginEnd="10dp"/>
+                    <ImageButton
+                        android:id="@+id/increment_size"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/baseline_arrow_forward_ios_24"
+                        android:contentDescription="Increase Size"
+                        android:background="?attr/selectableItemBackground"/>
+                </LinearLayout>
+
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="ADD TO CART"
-            android:layout_marginStart="15dp"
-            android:backgroundTint="#00E676"
-            android:layout_margin="10dp"
-            android:textColor="@color/black"
-            android:fontFamily="@font/montserrat1"
-            android:id="@+id/addtocart" />
-        <com.google.android.material.button.MaterialButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="BUY NOW"
-            android:layout_marginStart="15dp"
-            android:backgroundTint="#FFEA00"
-            android:layout_margin="10dp"
-            android:textColor="@color/black"
-            android:fontFamily="@font/montserrat1"
-            android:id="@+id/buynow" />
-
-
-    </LinearLayout>
-
-
-
-</RelativeLayout>
-
-
+            android:id="@+id/linear5"
+            android:layout_marginTop="40dp"
+            android:orientation="horizontal"
+            android:layout_below="@id/size_selector">
+            <com.google.android.material.button.MaterialButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="ADD TO CART"
+                android:layout_marginStart="15dp"
+                android:backgroundTint="#00E676"
+                android:layout_margin="10dp"
+                android:textColor="@color/black"
+                android:fontFamily="@font/montserrat1"
+                android:id="@+id/addtocart" />
+        </LinearLayout>
+    </RelativeLayout>
 </androidx.cardview.widget.CardView>

@@ -13,7 +13,7 @@ import com.sherrif.sneakerhub.models.Shoe
 
 
 //our class name is called SQLiteCartHelper and its going to accept 1 parameter called context
-class SQLiteCartHelper(context : Context) : SQLiteOpenHelper(context, "cart3.db",null,1) {
+class SQLiteCartHelper(context : Context) : SQLiteOpenHelper(context, "cart4.db",null,1) {
     //    make context visible to other functions
     val context = context
     override fun onCreate(p0: SQLiteDatabase?) {
@@ -25,16 +25,16 @@ class SQLiteCartHelper(context : Context) : SQLiteOpenHelper(context, "cart3.db"
         name VARCHAR,
         price INTEGER,
         description TEXT,
-        brand VARCHAR,
+        brand VARCHAR,photo VARCHAR,
         quantity INTEGER
-        
+      
         
     )
 """.trimIndent()
 
         p0?.execSQL(createtable)
     }
-
+//VARCHAR
     override fun onUpgrade(p0: SQLiteDatabase?, p1: Int, p2: Int) {
         p0?.execSQL("DROP TABLE IF EXISTS cart")
         onCreate(p0)
@@ -66,35 +66,31 @@ class SQLiteCartHelper(context : Context) : SQLiteOpenHelper(context, "cart3.db"
 
     // function to retrieve all record in cart
     //loop them in arraylist
-    fun getAllItems():ArrayList<Shoe> {
-        // get permission to write database
+    fun getAllItems(): ArrayList<Shoe> {
         val p0 = this.writableDatabase
         val items = ArrayList<Shoe>()
-        //create a cursor for our results
-        val result: Cursor = p0.rawQuery("select* from cart", null)
-        // lets add all the rows into the items in our arraylist
+        val result: Cursor = p0.rawQuery("SELECT * FROM cart", null)
+
         while (result.moveToNext()) {
-//            access the lab test model
             val model = Shoe()
-            model.shoe_id = result.getString(0)//assume one row
-            model.category_id = result.getString(1)
-            model.name = result.getString(2)
-            model.price = result.getString(3)
-            model.description = result.getString(4)
-            model.brand = result.getString(5)
-            model.quantity = result.getString(6)
+            model.shoe_id = result.getString(0) ?: ""  // Safely handle potential null values
+            model.category_id = result.getString(1) ?: ""
+            model.name = result.getString(2) ?: ""
+            model.price = result.getString(3) ?: ""
+            model.description = result.getString(4) ?: ""
+            model.brand = result.getString(5) ?: ""
+            model.photo = result.getString(6) ?: ""
+            model.quantity = result.getString(7) ?: ""
 
-
-
-            //add our model to arraylist
             items.add(model)
-        }///end of while loop
+        }
+
+        result.close()  // Close the cursor to release resources
         return items
+    }
 
 
-    }// end of get all items
-
-        // delete records by id..... this deletes one record at a time
+    // delete records by id..... this deletes one record at a time
 
         //fun to get the total cost of cart items
         fun totalcost(): Double {
@@ -138,7 +134,7 @@ class SQLiteCartHelper(context : Context) : SQLiteOpenHelper(context, "cart3.db"
     }// end of clear cart by id
     //    insert/ Save to cart table
 
-    fun insertData(shoe_id: String, category_id: String, name: String, price: String, description: String, brand: String,
+    fun insertData(shoe_id: String, category_id: String, name: String, price: String, description: String, brand: String,photo:String,
                    quantity:String) {
         //ask permission to write our db
         val p0 = this.writableDatabase
@@ -150,8 +146,8 @@ class SQLiteCartHelper(context : Context) : SQLiteOpenHelper(context, "cart3.db"
         values.put("price", price)
         values.put("description", description)
         values.put("brand", brand)
+        values.put("photo", photo)
         values.put("quantity", quantity)
-
 
 
 //    save/ inset to cart table

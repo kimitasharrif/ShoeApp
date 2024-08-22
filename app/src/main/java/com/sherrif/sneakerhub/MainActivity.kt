@@ -13,6 +13,7 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
@@ -35,6 +36,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var progress: ProgressBar
     private lateinit var itemList: List<Shoe>
     private lateinit var swiperrefresh: SwipeRefreshLayout
+    private lateinit var buttons: List<MaterialButton>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -113,18 +115,47 @@ class MainActivity : AppCompatActivity() {
         // Set the shoe data
         getShoe()
 
-        // Set up button click listeners
-        findViewById<MaterialButton>(R.id.button_show_all).setOnClickListener {
-            adapter.filterByCategory(-1) // -1 indicates showing all shoes
+//        // Set up button click listeners
+//        findViewById<MaterialButton>(R.id.button_show_all).setOnClickListener {
+//            adapter.filterByCategory(-1) // -1 indicates showing all shoes
+//        }
+//
+//        findViewById<MaterialButton>(R.id.button_category_sneakers).setOnClickListener {
+//            adapter.filterByCategory(1) // Replace 1 with the actual category ID for Sneakers
+//        }
+//
+//        findViewById<MaterialButton>(R.id.button_category_boots).setOnClickListener {
+//            adapter.filterByCategory(2) // Replace 2 with the actual category ID for Boots
+//        }
+        // Set up button click listeners and handle active button state
+        // Initialize buttons
+        buttons = listOf(
+            findViewById(R.id.button_show_all),
+            findViewById(R.id.button_category_sneakers),
+            findViewById(R.id.button_category_official),
+            findViewById(R.id.button_category_boots),
+            findViewById(R.id.button_category_sandals),
+            findViewById(R.id.button_category_sports)
+        )
+        buttons.forEachIndexed { index, button ->
+            button.setOnClickListener {
+                updateButtonStyles(button.id)
+                when (index) {
+                    0 -> adapter.filterByCategory(-1) // Show all
+                    1 -> adapter.filterByCategory(1)  // Replace with the actual category ID for Sneakers
+                    2 -> adapter.filterByCategory(2)  // Replace with the actual category ID for official
+                    3 -> adapter.filterByCategory(3)  // Replace with the actual category ID for Boots
+                    4 -> adapter.filterByCategory(4)  // Replace with the actual category ID for sandals
+                    5 -> adapter.filterByCategory(5)  // Replace with the actual category ID for sports
+                    // Add more cases for other categories
+                }
+            }
         }
 
-        findViewById<MaterialButton>(R.id.button_category_sneakers).setOnClickListener {
-            adapter.filterByCategory(1) // Replace 1 with the actual category ID for Sneakers
-        }
 
-        findViewById<MaterialButton>(R.id.button_category_boots).setOnClickListener {
-            adapter.filterByCategory(2) // Replace 2 with the actual category ID for Boots
-        }
+        // Set the default selected button to "All"
+        updateButtonStyles(R.id.button_show_all)
+        adapter.filterByCategory(-1) // Show all shoes by default
 
         // Set up SwipeRefreshLayout to refresh data
         swiperrefresh.setOnRefreshListener {
@@ -176,5 +207,14 @@ class MainActivity : AppCompatActivity() {
             }
         }
         adapter.filterList(filteredList)
+    }
+    private fun updateButtonStyles(selectedButtonId: Int) {
+        buttons.forEach { button ->
+            button.backgroundTintList = if (button.id == selectedButtonId) {
+                ContextCompat.getColorStateList(this, R.color.blue_700)
+            } else {
+                ContextCompat.getColorStateList(this, R.color.teal_700)
+            }
+        }
     }
 }

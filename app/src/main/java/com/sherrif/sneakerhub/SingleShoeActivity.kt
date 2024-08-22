@@ -1,11 +1,20 @@
 package com.sherrif.sneakerhub
 
+import android.graphics.drawable.Drawable
 import android.os.Bundle
+import android.util.Log
+import android.widget.ImageView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import com.bumptech.glide.Glide
+import com.bumptech.glide.load.DataSource
+import com.bumptech.glide.load.engine.GlideException
+import com.bumptech.glide.request.RequestListener
+import com.bumptech.glide.request.RequestOptions
+import com.bumptech.glide.request.target.Target
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.textview.MaterialTextView
 import com.sherrif.sneakerhub.helpers.SQLiteCartHelper
@@ -23,7 +32,7 @@ class SingleShoeActivity : AppCompatActivity() {
         val shoename = findViewById<MaterialTextView>(R.id.name)
         val shoebrand = findViewById<MaterialTextView>(R.id.brand)
         val shoeprice = findViewById<MaterialTextView>(R.id.price)
-
+        val shoephoto = findViewById<ImageView>(R.id.shoeimage)
         val cartbtn = findViewById<MaterialButton>(R.id.addtocart)
 
         // Retrieve data from intent extras
@@ -33,17 +42,35 @@ class SingleShoeActivity : AppCompatActivity() {
         val price = intent.extras?.getString("price")
         val description = intent.extras?.getString("description")
         val brand = intent.extras?.getString("brand")
+        val photo = intent.extras?.getString("photo")
         val quantity = intent.extras?.getString("quantity")
-
-
 
         shoename.text = name
         shoebrand.text = brand
         shoeprice.text = "$price  KES"
 
+        // Load the shoe photo using Glide
+        Glide.with(this)
+            .load(photo)
+            .apply(RequestOptions()
+                .placeholder(R.drawable.error_image) // Placeholder image while loading
+                .error(R.drawable.error_image) // Error image if loading fails
+            )
+            .listener(object : RequestListener<Drawable> {
+                override fun onLoadFailed(e: GlideException?, model: Any?, target: Target<Drawable>?, isFirstResource: Boolean): Boolean {
+                    Log.e("SingleShoeActivity", "Error loading image", e)
+                    return false
+                }
+
+                override fun onResourceReady(resource: Drawable?, model: Any?, target: Target<Drawable>?, dataSource: DataSource?, isFirstResource: Boolean): Boolean {
+                    // Optionally do something when the resource is ready
+                    return false
+                }
+            })
+            .into(shoephoto)
+//        cart4.dp
 
         cartbtn.setOnClickListener {
-            //call our class called SQLCart helper
             val helper = SQLiteCartHelper(applicationContext)
             try {
                 helper.insertData(
@@ -53,33 +80,25 @@ class SingleShoeActivity : AppCompatActivity() {
                     price!!,
                     description!!,
                     brand!!,
+                    photo!!,
                     quantity!!
                 )
-//
-            }   // end of try
-            catch (e: Exception) {
+            } catch (e: Exception) {
                 Toast.makeText(applicationContext, "An error Occurred", Toast.LENGTH_SHORT).show()
+            }
+        }
 
-            }   //end of catch
-        }//end of on click listener
-        // test our item count inside our cart
+        // Test item count inside the cart
         val helper = SQLiteCartHelper(applicationContext)
         val count = helper.getNumberOfItems()
-//        Toast.makeText(applicationContext, "Item count is $count", Toast.LENGTH_SHORT).show()
 
-
-//get all the items
+        // Get all the items
         val items = helper.getAllItems()
         for (item in items) {
-//                Toast.makeText(applicationContext, "${item.shoe_id}", Toast.LENGTH_SHORT).show()
-//
-        }//end of for loop
-//        helper.clearCartById("2")
-            helper.totalcost()
-
-
-            //e are forced
-
-
+            // Optionally display item data or use it as needed
         }
+
+        helper.totalcost()
     }
+}
+//cart4.db

@@ -1,68 +1,74 @@
 package com.sherrif.sneakerhub.adapters
 
 import android.content.Context
-import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.textview.MaterialTextView
-import com.sherrif.sneakerhub.MyCart
 import com.sherrif.sneakerhub.R
 import com.sherrif.sneakerhub.helpers.SQLiteCartHelper
 import com.sherrif.sneakerhub.models.Shoe
+import com.squareup.picasso.Picasso
 
+class ShoeCartAdapter(private val context: Context) : RecyclerView.Adapter<ShoeCartAdapter.ViewHolder>() {
+    private var itemList: List<Shoe> = listOf()
 
-
-class ShoeCartAdapter (var context :Context):RecyclerView.Adapter<ShoeCartAdapter.ViewHolder>(){
-    //create a list and connect it with our model
-    var itemList:List<Shoe> = listOf()
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
 
-    // access the single_labtest_cart
-    override fun onCreateViewHolder(
-        parent: ViewGroup,
-        viewType: Int
-    ): ShoeCartAdapter.ViewHolder {
-        var view =
-            LayoutInflater.from(parent.context).inflate(R.layout.single_shoe_cart, parent, false)
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.single_shoe_cart, parent, false)
         return ViewHolder(view)
-
     }
 
-    override fun onBindViewHolder(holder: ShoeCartAdapter.ViewHolder, position: Int) {
-        // fetch three textview sand one button
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+        // Fetch the views
         val name = holder.itemView.findViewById<MaterialTextView>(R.id.name)
         val brand = holder.itemView.findViewById<MaterialTextView>(R.id.brand)
         val price = holder.itemView.findViewById<MaterialTextView>(R.id.price)
-        val btnremove = holder.itemView.findViewById<MaterialButton>(R.id.remove)
+        val photo = holder.itemView.findViewById<ImageView>(R.id.shoeimage)
+        val btnRemove = holder.itemView.findViewById<MaterialButton>(R.id.remove)
 
-        // assign one cart item
+        // Assign one cart item
         val shoe = itemList[position]
         name.text = shoe.name
         brand.text = shoe.brand
-        price.text = shoe.price+ "KES"
+        price.text = "${shoe.price} KES"
 
-        btnremove.setOnClickListener{
-            val helper = SQLiteCartHelper(context)
-              helper.clearCartById(shoe_id = String())
-
+        // Load the image using Picasso
+        val imageUrl = shoe.photo
+        if (imageUrl.isNullOrEmpty()) {
+            // Handle empty or null image URL
+            photo.setImageResource(R.drawable.error_image) // Set a default image
+        } else {
+            Picasso.get()
+                .load(imageUrl)
+                .placeholder(R.drawable.shoe) // Placeholder image
+                .error(R.drawable.error_image) // Error image
+                .into(photo)
         }
-        Toast.makeText(context, "total cost is ${shoe.price}", Toast.LENGTH_SHORT).show()
+
+        btnRemove.setOnClickListener {
+            val shoeId = shoe.shoe_id
+            val helper = SQLiteCartHelper(context)
+            helper.clearCartById(shoeId)
+            // Update the itemList and notify the adapter of the change
+            val updatedList = itemList.filter { it.shoe_id != shoeId }
+            setListItems(updatedList)
+        }
+
+        Toast.makeText(context, "Total cost is ${shoe.price}", Toast.LENGTH_SHORT).show()
     }
 
     override fun getItemCount(): Int {
-        // count how many items we have in the cart
         return itemList.size
-    }// end of get item count
-    // earliier we mentioned itemlist nis empty we will get data from aoi and then bring it to below functio
-    // the data you brings must follow the data inlab test model
+    }
 
-    fun setListIteems(data:List<Shoe>){
-        itemList = data// link the data to itemlist
+    fun setListItems(data: List<Shoe>) {
+        itemList = data
         notifyDataSetChanged()
-//        loaded
     }
 }
